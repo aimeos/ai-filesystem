@@ -1,0 +1,19 @@
+{
+	"name": "aimeos/ai-filesystem",
+	"description": "Aimeos file system layer extension",
+	"keywords": ["aimeos", "extension", "file system", "flysystem"]
+	"type": "aimeos-extension",
+	"license": "LGPL-3.0",
+	"require": {
+		"php": ">=5.3.3",
+		"league/flysystem": "~1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Aimeos\\MW\\": "lib/mwlib/src/MW/"
+		},
+		"classmap": [
+			"lib/custom/src"
+		]
+	}
+}
