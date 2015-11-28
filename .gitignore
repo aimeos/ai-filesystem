@@ -1,0 +1,4 @@
+*.log
+*.junit.xml
+coverage.xml
+coveralls.json
