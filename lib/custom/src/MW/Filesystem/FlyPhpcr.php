@@ -47,7 +47,7 @@ class FlyPhpcr extends FlyBase implements Iface, DirIface, MetaIface
 			$factory = new RepositoryFactoryDoctrineDBAL();
 
 			$repo = $factory->getRepository( array( 'jackalope.doctrine_dbal_connection' => $conn ) );
-			$session = $repo->login( new \PHPCR\SimpleCredentials( '', '' ) );
+			$session = $repo->login( new \PHPCR\SimpleCredentials( null, null ) );
 
 			$this->fs = new Filesystem( new PhpcrAdapter( $session, $config['root'] ) );
 		}
