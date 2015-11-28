@@ -58,7 +58,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function mkdir( $path )
 	{
 		if( $this->getProvider()->createDir( $path ) === false ) {
@@ -73,7 +73,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function rmdir( $path )
 	{
 		if( $this->getProvider()->deleteDir( $path ) === false ) {
