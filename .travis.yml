@@ -14,7 +14,7 @@ before_script:
   - composer require league/flysystem-aws-s3-v3 league/flysystem-copy league/flysystem-dropbox league/flysystem-gridfs league/flysystem-memory league/flysystem-rackspace league/flysystem-replicate-adapter league/flysystem-sftp league/flysystem-webdav jackalope/jackalope-doctrine-dbal league/flysystem-phpcr league/flysystem-ziparchive
 
 script:
-  - vendor/bin/phing -Ddir=ext/ai-filesystem setup coverageext checkext
+  - vendor/bin/phing -Ddir=ext/ai-filesystem coverageext checkext
 
 after_success:
   - php vendor/bin/coveralls -c ext/ai-filesystem/.coveralls.yml
