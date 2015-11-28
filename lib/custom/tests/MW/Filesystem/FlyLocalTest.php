@@ -12,4 +12,14 @@ class FlyLocalTest extends \PHPUnit_Framework_TestCase
 
 		$object->has( 'test' );
 	}
+
+
+	public function testGetProviderNoBasedir()
+	{
+		$object = new FlyLocal( array() );
+		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+
+		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$object->has( 'test' );
+	}
 }
