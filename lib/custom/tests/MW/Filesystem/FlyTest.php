@@ -228,6 +228,23 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testReadf()
+	{
+		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'flytest';
+		file_put_contents( $file, 'test' );
+
+		$this->mock->expects( $this->once() )->method( 'readStream' )
+			->will( $this->returnValue( fopen( $file, 'r' ) ) );
+
+		$result = $this->object->readf( 'file' );
+
+		$this->assertEquals( 'test', file_get_contents( $result ) );
+
+		unlink( $result );
+		unlink( $file );
+	}
+
+
 	public function testReads()
 	{
 		$this->mock->expects( $this->once() )->method( 'readStream' )
@@ -283,6 +300,19 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( 'test', 'value' );
+	}
+
+
+	public function testWritef()
+	{
+		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'flytest';
+		file_put_contents( $file, 'test' );
+
+		$this->mock->expects( $this->once() )->method( 'putStream' );
+
+		$this->object->writef( 'file', $file );
+
+		unlink( $file );
 	}
 
 

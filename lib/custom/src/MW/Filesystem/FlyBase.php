@@ -20,6 +20,7 @@ namespace Aimeos\MW\Filesystem;
 abstract class FlyBase implements Iface, DirIface, MetaIface
 {
 	private $config;
+	private $tempdir;
 
 
 	/**
@@ -30,6 +31,17 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function __construct( array $config )
 	{
 		$this->config = $config;
+
+		if( !isset( $config['tempdir'] ) ) {
+			$config['tempdir'] = sys_get_temp_dir();
+		}
+
+		if( !is_dir( $config['tempdir'] ) && mkdir( $config['tempdir'], 0755, true ) === false ) {
+			throw new Exception( sprintf( 'Directory "%1$s" could not be created', $config['tempdir'] ) );
+		}
+
+		$ds = DIRECTORY_SEPARATOR;
+		$this->tempdir = realpath( str_replace( '/', $ds, rtrim( $config['tempdir'], '/' ) ) ) . $ds;
 	}
 
 
@@ -204,6 +216,36 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 
 
 	/**
+	 * Reads the content of the remote file and writes it to a local one
+	 *
+	 * @param string $path Path to the remote file
+	 * @return string Path of the local file
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function readf( $path )
+	{
+		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
+		}
+
+		if( ( $handle = @fopen( $filename, 'w' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
+		}
+
+		$stream = $this->reads( $path );
+
+		if( @stream_copy_to_stream( $stream, $handle ) == false ) {
+			throw new Exception( sprintf( 'Couldn\'t copy stream for "%1$s"', $path ) );
+		}
+
+		fclose( $stream );
+		fclose( $handle );
+
+		return $filename;
+	}
+
+
+	/**
 	 * Returns the stream descriptor for the file
 	 *
 	 * {@inheritDoc}
@@ -248,6 +290,30 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 
 		if( $result === false ) {
 			throw new Exception( $path );
+		}
+	}
+
+
+	/**
+	 * Writes the content of the local file to the remote path
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param string $path Path to the remote file
+	 * @param string $file Path to the local file
+	 * @return void
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function writef( $path, $local )
+	{
+		if( ( $handle = @fopen( $local, 'r' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
+		}
+
+		$this->writes( $path, $handle );
+
+		if( is_resource( $handle ) ) {
+			fclose( $handle );
 		}
 	}
 
