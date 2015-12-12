@@ -8,12 +8,4 @@ return array(
 	'include' => array(
 		'lib/custom/src',
 	),
-	'i18n' => array(
-	),
-	'config' => array(
-	),
-	'custom' => array(
-	),
-	'setup' => array(
-	),
 );
