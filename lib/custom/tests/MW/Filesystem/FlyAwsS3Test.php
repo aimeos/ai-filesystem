@@ -5,6 +5,14 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyAwsS3Test extends \PHPUnit_Framework_TestCase
 {
+	protected function setUp()
+	{
+		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+			$this->markTestSkipped( 'Install Flysystem first' );
+		}
+	}
+
+
 	public function testGetProvider()
 	{
 		if( !class_exists( '\League\Flysystem\AwsS3v3\AwsS3Adapter' ) ) {

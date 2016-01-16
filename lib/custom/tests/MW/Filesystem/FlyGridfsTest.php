@@ -5,6 +5,14 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyGridfsTest extends \PHPUnit_Framework_TestCase
 {
+	protected function setUp()
+	{
+		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+			$this->markTestSkipped( 'Install Flysystem first' );
+		}
+	}
+
+
 	public function testGetProvider()
 	{
 		$object = new FlyGridfs( array() );

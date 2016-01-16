@@ -5,6 +5,14 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyLocalTest extends \PHPUnit_Framework_TestCase
 {
+	protected function setUp()
+	{
+		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+			$this->markTestSkipped( 'Install Flysystem first' );
+		}
+	}
+
+
 	public function testGetProvider()
 	{
 		$object = new FlyLocal( array( 'basedir' => dirname( dirname( __DIR__ ) ) ) );
