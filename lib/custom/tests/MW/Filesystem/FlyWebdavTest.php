@@ -19,10 +19,17 @@ class FlyWebdavTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Install Flysystem WebDAV adapter' );
 		}
 
-		$object = new FlyWebdav( array( 'baseUri' => 'http://test.webdav.org/dav/' ) );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		try
+		{
+			$object = new FlyWebdav( array( 'baseUri' => 'http://test.webdav.org/dav/' ) );
+			$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$object->has( 'test' );
+			$object->has( 'test' );
+		}
+		catch( \Sabre\HTTP\ClientException $e )
+		{
+			$this->markTestSkipped( $e->getMessage() );
+		}
 	}
 
 
