@@ -2,11 +2,12 @@
 	"name": "aimeos/ai-filesystem",
 	"description": "Aimeos file system layer extension",
 	"keywords": ["aimeos", "extension", "file system", "flysystem"],
+	"homepage": "https://aimeos.org/",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
-		"source": "https://github.com/Aimeos/ai-container",
-		"issues": "https://github.com/Aimeos/ai-container/issues",
+		"source": "https://github.com/aimeos/ai-filesystem",
+		"issues": "https://github.com/aimeos/ai-filesystem/issues",
 		"forum": "https://aimeos.org/help",
 		"wiki": "https://aimeos.org/docs"
 	},
