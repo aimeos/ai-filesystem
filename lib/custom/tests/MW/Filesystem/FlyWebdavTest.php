@@ -26,7 +26,7 @@ class FlyWebdavTest extends \PHPUnit_Framework_TestCase
 
 			$object->has( 'test' );
 		}
-		catch( \Sabre\HTTP\ClientException $e )
+		catch( \Exception $e )
 		{
 			$this->markTestSkipped( $e->getMessage() );
 		}
