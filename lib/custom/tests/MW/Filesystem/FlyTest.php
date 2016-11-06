@@ -122,7 +122,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testSizeException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'getSize' )
-		->will( $this->throwException( new \Exception() ) );
+		->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->size( 'test' );
@@ -151,7 +151,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testTimeException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'getTimestamp' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->time( 'test' );
@@ -170,7 +170,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testRmException()
 	{
 		$this->mock->expects( $this->once() )->method( 'delete' )
-		->will( $this->throwException( new \Exception() ) );
+		->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rm( 'test' );
@@ -221,7 +221,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testReadException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'read' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->read( 'test' );
@@ -267,7 +267,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testReadsException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'readStream' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->reads( 'test' );
@@ -296,7 +296,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testWriteException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'put' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( 'test', 'value' );
@@ -338,7 +338,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testWritesException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'putStream' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writes( 'test', null );
@@ -367,7 +367,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testMoveException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'rename' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->move( 'file1', 'file2' );
@@ -396,7 +396,7 @@ class FlyTest extends \PHPUnit_Framework_TestCase
 	public function testCopyException2()
 	{
 		$this->mock->expects( $this->once() )->method( 'copy' )
-		->will( $this->throwException( new \Exception() ) );
+		->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->copy( 'file1', 'file2' );
