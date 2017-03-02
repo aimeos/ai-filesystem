@@ -15,7 +15,7 @@ class FlyFtpTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyFtp( array( 'host' => 'ftp.kernel.org' ) );
+		$object = new FlyFtp( array( 'host' => 'ftp.heise.de' ) );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$object->has( 'test' );
