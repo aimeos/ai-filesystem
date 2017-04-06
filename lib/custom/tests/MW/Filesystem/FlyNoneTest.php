@@ -15,7 +15,7 @@ class FlyNoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyNone( array() );
+		$object = new FlyNone( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$object->has( 'test' );

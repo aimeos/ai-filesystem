@@ -19,7 +19,7 @@ class FlyAzureTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Install Flysystem Azure adapter' );
 		}
 
-		$object = new FlyAzure( array() );
+		$object = new FlyAzure( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$object->has( 'test' );

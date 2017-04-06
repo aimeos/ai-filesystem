@@ -19,7 +19,7 @@ class FlyMemoryTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Install Flysystem memory adapter' );
 		}
 
-		$object = new FlyMemory( array() );
+		$object = new FlyMemory( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$object->has( 'test' );

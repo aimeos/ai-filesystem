@@ -19,7 +19,7 @@ class FlyZipTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Install Flysystem ZipArchive adapter' );
 		}
 
-		$object = new FlyZip( array() );
+		$object = new FlyZip( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );

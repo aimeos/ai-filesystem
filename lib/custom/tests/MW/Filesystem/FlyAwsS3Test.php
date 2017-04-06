@@ -29,7 +29,7 @@ class FlyAwsS3Test extends \PHPUnit_Framework_TestCase
 
 	public function testGetProviderNoBucket()
 	{
-		$object = new FlyAwsS3( array() );
+		$object = new FlyAwsS3( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );

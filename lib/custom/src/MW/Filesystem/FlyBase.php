@@ -105,7 +105,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function scan( $path = null )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $this->getProvider()->listContents( $path ) as $entry ) {
 			$list[] = $entry['basename'];

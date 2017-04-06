@@ -15,7 +15,7 @@ class FlyRackspaceTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyRackspace( array() );
+		$object = new FlyRackspace( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );

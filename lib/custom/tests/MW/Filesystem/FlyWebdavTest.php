@@ -39,7 +39,7 @@ class FlyWebdavTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Install Flysystem WebDAV adapter' );
 		}
 
-		$object = new FlyWebdav( array() );
+		$object = new FlyWebdav( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( '\InvalidArgumentException' );

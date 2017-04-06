@@ -15,7 +15,7 @@ class FlyDropboxTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyDropbox( array() );
+		$object = new FlyDropbox( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );

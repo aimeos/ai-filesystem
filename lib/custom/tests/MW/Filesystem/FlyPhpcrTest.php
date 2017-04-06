@@ -15,7 +15,7 @@ class FlyPhpcrTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyPhpcr( array() );
+		$object = new FlyPhpcr( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );

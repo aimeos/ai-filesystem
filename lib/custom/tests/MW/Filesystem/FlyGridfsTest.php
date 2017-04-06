@@ -15,7 +15,7 @@ class FlyGridfsTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProvider()
 	{
-		$object = new FlyGridfs( array() );
+		$object = new FlyGridfs( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
