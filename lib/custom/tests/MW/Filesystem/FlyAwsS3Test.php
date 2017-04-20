@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyAwsS3Test extends \PHPUnit_Framework_TestCase
+class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

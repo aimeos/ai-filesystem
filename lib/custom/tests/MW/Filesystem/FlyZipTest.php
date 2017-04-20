@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyZipTest extends \PHPUnit_Framework_TestCase
+class FlyZipTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

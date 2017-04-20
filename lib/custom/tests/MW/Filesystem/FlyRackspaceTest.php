@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyRackspaceTest extends \PHPUnit_Framework_TestCase
+class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

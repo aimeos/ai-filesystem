@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyMemoryTest extends \PHPUnit_Framework_TestCase
+class FlyMemoryTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

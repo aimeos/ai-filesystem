@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyNoneTest extends \PHPUnit_Framework_TestCase
+class FlyNoneTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyAzureTest extends \PHPUnit_Framework_TestCase
+class FlyAzureTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

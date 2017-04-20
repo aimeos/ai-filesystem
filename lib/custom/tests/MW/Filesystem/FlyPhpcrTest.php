@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyPhpcrTest extends \PHPUnit_Framework_TestCase
+class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

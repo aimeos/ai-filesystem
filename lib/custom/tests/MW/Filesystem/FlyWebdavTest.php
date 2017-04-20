@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyWebdavTest extends \PHPUnit_Framework_TestCase
+class FlyWebdavTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

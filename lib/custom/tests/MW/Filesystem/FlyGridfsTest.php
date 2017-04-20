@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyGridfsTest extends \PHPUnit_Framework_TestCase
+class FlyGridfsTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

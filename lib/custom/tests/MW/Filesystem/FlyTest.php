@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem;
 
 
-class FlyTest extends \PHPUnit_Framework_TestCase
+class FlyTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;
