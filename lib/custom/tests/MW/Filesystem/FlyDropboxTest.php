@@ -18,7 +18,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyDropbox( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 
@@ -31,7 +31,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyDropbox( $config );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 
@@ -49,7 +49,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyDropbox( $config );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( 'Exception' );
+		$this->setExpectedException( 'Exception' );
 		$object->has( 'test' );
 	}
 }

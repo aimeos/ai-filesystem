@@ -22,7 +22,7 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 		$object = new FlyAwsS3( array( 'bucket' => 'test' ) );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( 'InvalidArgumentException' );
+		$this->setExpectedException( 'InvalidArgumentException' );
 		$object->has( 'test' );
 	}
 
@@ -32,7 +32,7 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 		$object = new FlyAwsS3( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 }

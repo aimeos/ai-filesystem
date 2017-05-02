@@ -27,7 +27,7 @@ class FlyLocalTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyLocal( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 }

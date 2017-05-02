@@ -22,7 +22,7 @@ class FlyZipTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyZip( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 
