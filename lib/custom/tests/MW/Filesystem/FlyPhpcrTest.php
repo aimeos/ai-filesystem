@@ -18,7 +18,7 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyPhpcr( [] );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 
@@ -37,7 +37,7 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyPhpcr( $config );
 		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
 
-		$this->setExpectedException( '\PHPCR\RepositoryException' );
+		$this->expectException( '\PHPCR\RepositoryException' );
 		$object->has( 'test' );
 	}
 }
