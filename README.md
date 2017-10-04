@@ -8,7 +8,7 @@ Aimeos file system extension
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-filesystem/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-filesystem?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/?branch=master)
 
-The Aimeos file system extension contains adapter for storing files in the cloud, on remote servers or other storage facilities. 
+The Aimeos file system extension contains adapter for storing files in the cloud, on remote servers or other storage facilities.
 
 ## Table of contents
 
@@ -27,7 +27,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=comp
 Add the filesystem extension name to the "require" section of your ```composer.json``` (or your ```composer.aimeos.json```, depending on what is available) file:
 ```
 "require": [
-    "aimeos/ai-filesystem": "dev-master",
+    "aimeos/ai-filesystem": "~2017.10",
     ...
 ],
 ```
