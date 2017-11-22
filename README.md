@@ -7,8 +7,9 @@ Aimeos file system extension
 [![Build Status](https://travis-ci.org/aimeos/ai-filesystem.svg?branch=master)](https://travis-ci.org/aimeos/ai-filesystem)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-filesystem/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-filesystem?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/?branch=master)
+[![License](https://poser.pugx.org/aimeos/ai-filesystem/license.svg)](https://packagist.org/packages/aimeos/ai-filesystem)
 
-The Aimeos file system extension contains adapter for storing files in the cloud, on remote servers or other storage facilities. 
+The Aimeos file system extension contains adapter for storing files in the cloud, on remote servers or other storage facilities.
 
 ## Table of contents
 
