@@ -22,7 +22,7 @@ class FlyWebdavTest extends \PHPUnit\Framework\TestCase
 		try
 		{
 			$object = new FlyWebdav( array( 'baseUri' => 'http://test.webdav.org/dav/' ) );
-			$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+			$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 			$object->has( 'test' );
 		}
@@ -40,9 +40,9 @@ class FlyWebdavTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyWebdav( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\InvalidArgumentException' );
+		$this->setExpectedException( \InvalidArgumentException::class );
 		$object->has( 'test' );
 	}
 }

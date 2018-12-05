@@ -16,7 +16,7 @@ class FlyLocalTest extends \PHPUnit\Framework\TestCase
 	public function testGetProvider()
 	{
 		$object = new FlyLocal( array( 'basedir' => dirname( dirname( __DIR__ ) ) ) );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$object->has( 'test' );
 	}
@@ -25,7 +25,7 @@ class FlyLocalTest extends \PHPUnit\Framework\TestCase
 	public function testGetProviderNoBasedir()
 	{
 		$object = new FlyLocal( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );

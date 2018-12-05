@@ -16,9 +16,9 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 	public function testGetProvider()
 	{
 		$object = new FlyPhpcr( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
@@ -35,9 +35,9 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 			'root' => '/',
 		);
 		$object = new FlyPhpcr( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\PHPCR\RepositoryException' );
+		$this->setExpectedException( \PHPCR\RepositoryException::class );
 		$object->has( 'test' );
 	}
 }

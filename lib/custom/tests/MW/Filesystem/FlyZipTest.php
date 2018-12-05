@@ -20,9 +20,9 @@ class FlyZipTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyZip( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
@@ -34,7 +34,7 @@ class FlyZipTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyZip( array( 'filepath' => '/tmp/flytest.zip' ) );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$object->has( 'test' );
 	}

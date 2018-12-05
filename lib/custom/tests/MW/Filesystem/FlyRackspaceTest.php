@@ -16,9 +16,9 @@ class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 	public function testGetProvider()
 	{
 		$object = new FlyRackspace( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
@@ -30,9 +30,9 @@ class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyRackspace( array( 'container' => 'test' ) );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\OpenCloud\Common\Exceptions\CredentialError' );
+		$this->setExpectedException( \OpenCloud\Common\Exceptions\CredentialError::class );
 		$object->has( 'test' );
 	}
 }

@@ -25,7 +25,7 @@ class FlyReplicateTest extends \PHPUnit\Framework\TestCase
 			'replica' => array( 'adapter' => 'FlyMemory' ),
 		);
 		$object = new FlyReplicate( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$object->has( 'test' );
 	}
@@ -37,7 +37,7 @@ class FlyReplicateTest extends \PHPUnit\Framework\TestCase
 			'adapter' => 'Replicate',
 		);
 		$object = new FlyReplicate( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
@@ -51,7 +51,7 @@ class FlyReplicateTest extends \PHPUnit\Framework\TestCase
 			'source' => array( 'adapter' => 'FlyMemory' ),
 		);
 		$object = new FlyReplicate( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );

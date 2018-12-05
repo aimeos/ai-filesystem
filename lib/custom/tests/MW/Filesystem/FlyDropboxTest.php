@@ -16,7 +16,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 	public function testGetProvider()
 	{
 		$object = new FlyDropbox( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
@@ -29,7 +29,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 			'accesstoken' => 'test',
 		);
 		$object = new FlyDropbox( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
@@ -47,7 +47,7 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 			'appsecret' => 'test',
 		);
 		$object = new FlyDropbox( $config );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'Exception' );
 		$object->has( 'test' );

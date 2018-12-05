@@ -20,7 +20,7 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyAwsS3( array( 'bucket' => 'test' ) );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$object->has( 'test' );
@@ -30,9 +30,9 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 	public function testGetProviderNoBucket()
 	{
 		$object = new FlyAwsS3( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 }

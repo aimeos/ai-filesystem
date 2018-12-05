@@ -20,7 +20,7 @@ class FlyAzureTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$object = new FlyAzure( [] );
-		$this->assertInstanceof( '\Aimeos\MW\Filesystem\Iface', $object );
+		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
 		$object->has( 'test' );
 	}
