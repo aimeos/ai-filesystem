@@ -413,5 +413,5 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @return \League\Flysystem\FilesystemInterface File system provider
 	 */
-	protected abstract function getProvider();
+	abstract protected function getProvider();
 }
