@@ -85,7 +85,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-filesystem:unittest' );
+		$ctx->setEditor( 'ai-filesystem:lib/custom' );
 
 		return $ctx;
 	}
