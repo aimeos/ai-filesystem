@@ -58,7 +58,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'createDir' )
 			->will( $this->returnValue( true ) );
 
-		$this->object->mkdir( 'test' );
+		$object = $this->object->mkdir( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\DirIface::class, $object );
 	}
 
 
@@ -77,7 +79,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'deleteDir' )
 			->will( $this->returnValue( true ) );
 
-		$this->object->rmdir( 'test' );
+		$object = $this->object->rmdir( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\DirIface::class, $object );
 	}
 
 
@@ -163,7 +167,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'delete' )
 		->will( $this->returnValue( 4 ) );
 
-		$this->object->rm( 'test' );
+		$object = $this->object->rm( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 
@@ -279,7 +285,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->will( $this->returnValue( true ) );
 
-		$this->object->write( 'test', 'value' );
+		$object = $this->object->write( 'test', 'value' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 
@@ -310,9 +318,10 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'putStream' );
 
-		$this->object->writef( 'file', $file );
+		$object = $this->object->writef( 'file', $file );
 
 		unlink( $file );
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 
@@ -321,7 +330,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'putStream' )
 			->will( $this->returnValue( true ) );
 
-		$this->object->writes( 'test', 1 );
+		$object = $this->object->writes( 'test', 1 );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 
@@ -350,7 +361,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'rename' )
 			->will( $this->returnValue( true ) );
 
-		$this->object->move( 'file1', 'file2' );
+		$object = $this->object->move( 'file1', 'file2' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 
@@ -379,7 +392,9 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'copy' )
 		->will( $this->returnValue( true ) );
 
-		$this->object->copy( 'file1', 'file2' );
+		$object = $this->object->copy( 'file1', 'file2' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 	}
 
 

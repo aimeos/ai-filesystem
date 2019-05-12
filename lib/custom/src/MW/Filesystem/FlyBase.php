@@ -68,7 +68,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Creates a new directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function mkdir( $path )
@@ -76,6 +76,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $this->getProvider()->createDir( $path ) === false ) {
 			throw new Exception( $path );
 		}
+
+		return $this;
 	}
 
 
@@ -83,7 +85,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Deletes the directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function rmdir( $path )
@@ -91,6 +93,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $this->getProvider()->deleteDir( $path ) === false ) {
 			throw new Exception( $path );
 		}
+
+		return $this;
 	}
 
 
@@ -165,7 +169,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Deletes the file for the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function rm( $path )
@@ -175,6 +179,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
+
+		return $this;
 	}
 
 
@@ -277,7 +283,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function write( $path, $content )
@@ -291,6 +297,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $result === false ) {
 			throw new Exception( $path );
 		}
+
+		return $this;
 	}
 
 
@@ -301,7 +309,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param string $file Path to the local file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writef( $path, $local )
@@ -315,6 +323,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( is_resource( $handle ) ) {
 			fclose( $handle );
 		}
+
+		return $this;
 	}
 
 
@@ -325,7 +335,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writes( $path, $stream )
@@ -339,6 +349,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $result === false ) {
 			throw new Exception( $path );
 		}
+
+		return $this;
 	}
 
 
@@ -347,7 +359,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function move( $from, $to )
@@ -361,6 +373,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $result === false ) {
 			throw new Exception( sprintf( 'Error moving "%1$s" to "%2$s"', $from, $to ) );
 		}
+
+		return $this;
 	}
 
 
@@ -369,7 +383,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function copy( $from, $to )
@@ -383,6 +397,8 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		if( $result === false ) {
 			throw new Exception( sprintf( 'Error copying "%1$s" to "%2$s"', $from, $to ) );
 		}
+
+		return $this;
 	}
 
 
