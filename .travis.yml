@@ -1,4 +1,5 @@
 sudo: false
+dist: xenial
 language: php
 
 php:
@@ -7,7 +8,6 @@ php:
   - 7.1
   - 7.0
   - 5.6
-  - 5.5
 
 matrix:
   fast_finish: true
@@ -15,7 +15,7 @@ matrix:
 before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
   - cd ../aimeos-core && mv ../ai-filesystem ext/
-  - composer require league/flysystem-aws-s3-v3 league/flysystem-dropbox league/flysystem-gridfs league/flysystem-memory league/flysystem-rackspace league/flysystem-replicate-adapter league/flysystem-sftp league/flysystem-webdav jackalope/jackalope-doctrine-dbal league/flysystem-phpcr league/flysystem-ziparchive
+  - travis_retry composer require league/flysystem-aws-s3-v3 league/flysystem-dropbox league/flysystem-gridfs league/flysystem-memory league/flysystem-rackspace league/flysystem-replicate-adapter league/flysystem-sftp league/flysystem-webdav jackalope/jackalope-doctrine-dbal league/flysystem-phpcr league/flysystem-ziparchive
 
 script:
   - vendor/bin/phing -Ddir=ext/ai-filesystem coverageext checkext
