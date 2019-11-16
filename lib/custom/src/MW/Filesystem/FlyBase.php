@@ -49,10 +49,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Tests if the given path is a directory
 	 *
 	 * @param string $path Path to the file or directory
-	 * @return boolean True if directory, false if not
+	 * @return bool True if directory, false if not
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function isdir( $path )
+	public function isdir( string $path ) : bool
 	{
 		$result = $this->getProvider()->getMetadata( $path );
 
@@ -71,7 +71,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function mkdir( $path )
+	public function mkdir( string $path ) : DirIface
 	{
 		if( $this->getProvider()->createDir( $path ) === false ) {
 			throw new Exception( $path );
@@ -88,7 +88,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rmdir( $path )
+	public function rmdir( string $path ) : DirIface
 	{
 		if( $this->getProvider()->deleteDir( $path ) === false ) {
 			throw new Exception( $path );
@@ -104,10 +104,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * {@inheritDoc}
 	 *
 	 * @param string $path Path to the filesystem or directory
-	 * @return \Iterator|array Iterator over the entries or array with entries
+	 * @return iterable Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function scan( $path = null )
+	public function scan( string $path = null ) : iterable
 	{
 		$list = [];
 
@@ -123,10 +123,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Returns the file size
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Size in bytes
+	 * @return int Size in bytes
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function size( $path )
+	public function size( string $path ) : int
 	{
 		try {
 			$size = $this->getProvider()->getSize( $path );
@@ -146,10 +146,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Returns the Unix time stamp for the file
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Unix time stamp in seconds
+	 * @return int Unix time stamp in seconds
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function time( $path )
+	public function time( string $path ) : int
 	{
 		try {
 			$time = $this->getProvider()->getTimestamp( $path );
@@ -172,7 +172,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rm( $path )
+	public function rm( string $path ) : Iface
 	{
 		try {
 			$this->getProvider()->delete( $path );
@@ -188,9 +188,9 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Tests if a file exists at the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return boolean True if it exists, false if not
+	 * @return bool True if it exists, false if not
 	 */
-	public function has( $path )
+	public function has( string $path ) : bool
 	{
 		return $this->getProvider()->has( $path );
 	}
@@ -205,7 +205,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return string File content
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function read( $path )
+	public function read( string $path ) : string
 	{
 		try {
 			$content = $this->getProvider()->read( $path );
@@ -228,7 +228,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return string Path of the local file
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function readf( $path )
+	public function readf( string $path ) : string
 	{
 		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
@@ -260,7 +260,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return resource File stream descriptor
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function reads( $path )
+	public function reads( string $path )
 	{
 		try {
 			$handle = $this->getProvider()->readStream( $path );
@@ -286,7 +286,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function write( $path, $content )
+	public function write( string $path, string $content ) : Iface
 	{
 		try {
 			$result = $this->getProvider()->put( $path, $content );
@@ -312,7 +312,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writef( $path, $local )
+	public function writef( string $path, string $local ) : Iface
 	{
 		if( ( $handle = @fopen( $local, 'r' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
@@ -338,7 +338,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writes( $path, $stream )
+	public function writes( string $path, $stream ) : Iface
 	{
 		try {
 			$result = $this->getProvider()->putStream( $path, $stream );
@@ -362,7 +362,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function move( $from, $to )
+	public function move( string $from, string $to ) : Iface
 	{
 		try {
 			$result = $this->getProvider()->rename( $from, $to );
@@ -386,7 +386,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function copy( $from, $to )
+	public function copy( string $from, string $to ) : Iface
 	{
 		try {
 			$result = $this->getProvider()->copy( $from, $to );
