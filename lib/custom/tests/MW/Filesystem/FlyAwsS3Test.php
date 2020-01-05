@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -22,7 +22,7 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 		$object = new FlyAwsS3( array( 'bucket' => 'test' ) );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		$object->has( 'test' );
 	}
 
@@ -32,7 +32,7 @@ class FlyAwsS3Test extends \PHPUnit\Framework\TestCase
 		$object = new FlyAwsS3( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
+		$this->expectException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 }

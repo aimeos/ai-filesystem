@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyLocalTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -27,7 +27,7 @@ class FlyLocalTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyLocal( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 }

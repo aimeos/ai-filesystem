@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyGridfsTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -18,7 +18,7 @@ class FlyGridfsTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyGridfs( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 
@@ -39,7 +39,7 @@ class FlyGridfsTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyGridfs( $config );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
 		$object->has( 'test' );
 	}
 }

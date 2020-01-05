@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -18,7 +18,7 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyPhpcr( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
+		$this->expectException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
@@ -37,7 +37,7 @@ class FlyPhpcrTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyPhpcr( $config );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \PHPCR\RepositoryException::class );
+		$this->expectException( \PHPCR\RepositoryException::class );
 		$object->has( 'test' );
 	}
 }

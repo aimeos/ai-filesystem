@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyWebdavTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -42,7 +42,7 @@ class FlyWebdavTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyWebdav( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class );
 		$object->has( 'test' );
 	}
 }

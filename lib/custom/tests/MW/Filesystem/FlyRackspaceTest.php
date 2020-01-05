@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -18,7 +18,7 @@ class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyRackspace( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
+		$this->expectException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
@@ -32,7 +32,7 @@ class FlyRackspaceTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyRackspace( array( 'container' => 'test' ) );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \OpenCloud\Common\Exceptions\CredentialError::class );
+		$this->expectException( \OpenCloud\Common\Exceptions\CredentialError::class );
 		$object->has( 'test' );
 	}
 }

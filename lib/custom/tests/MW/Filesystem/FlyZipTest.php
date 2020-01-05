@@ -5,7 +5,7 @@ namespace Aimeos\MW\Filesystem;
 
 class FlyZipTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
@@ -22,7 +22,7 @@ class FlyZipTest extends \PHPUnit\Framework\TestCase
 		$object = new FlyZip( [] );
 		$this->assertInstanceof( \Aimeos\MW\Filesystem\Iface::class, $object );
 
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
+		$this->expectException( \Aimeos\MW\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 
