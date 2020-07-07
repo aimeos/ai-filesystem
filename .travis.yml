@@ -12,7 +12,7 @@ matrix:
   fast_finish: true
 
 before_script:
-  - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+  - git clone --depth=50 --branch=2020.07 git://github.com/aimeos/aimeos-core.git ../aimeos-core
   - cd ../aimeos-core && mv ../ai-filesystem ext/
   - travis_retry composer require league/flysystem-aws-s3-v3 league/flysystem-dropbox league/flysystem-gridfs league/flysystem-memory league/flysystem-rackspace league/flysystem-replicate-adapter league/flysystem-sftp league/flysystem-webdav jackalope/jackalope-doctrine-dbal league/flysystem-phpcr league/flysystem-ziparchive
 
