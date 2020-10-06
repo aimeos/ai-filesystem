@@ -28,7 +28,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=comp
 Add the filesystem extension name to the "require" section of your ```composer.json``` (or your ```composer.aimeos.json```, depending on what is available) file:
 ```
 "require": [
-    "aimeos/ai-filesystem": "dev-master",
+    "aimeos/ai-filesystem": "2020.10.*",
     ...
 ],
 ```
