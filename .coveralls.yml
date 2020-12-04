@@ -1,3 +1,0 @@
-src_dir: ext/ai-filesystem
-json_path: ext/ai-filesystem/coveralls.json
-coverage_clover: ext/ai-filesystem/lib/custom/tests/coverage.xml
