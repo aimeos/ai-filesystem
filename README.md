@@ -2,9 +2,9 @@
     <img src="https://aimeos.org/fileadmin/template/icons/logo.png" alt="Aimeos logo" title="Aimeos" align="right" height="60" />
 </a>
 
-Aimeos file system extension
-===============================
-[![Build Status](https://travis-ci.org/aimeos/ai-filesystem.svg?branch=master)](https://travis-ci.org/aimeos/ai-filesystem)
+# Aimeos file system extension
+
+[![Build Status](https://circleci.com/gh/aimeos/ai-filesystem.svg?style=shield)](https://circleci.com/gh/aimeos/ai-filesystem)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-filesystem/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-filesystem?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-filesystem/?branch=master)
 [![License](https://poser.pugx.org/aimeos/ai-filesystem/license.svg)](https://packagist.org/packages/aimeos/ai-filesystem)
