@@ -5,7 +5,7 @@
 version: 2
 
 jobs:
-  "php-7.1":
+  "php-71":
     docker:
       - image: aimeos/ci-php:7.1
     steps:
@@ -22,7 +22,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
 
-  "php-7.2":
+  "php-72":
     docker:
       - image: aimeos/ci-php:7.2
     steps:
@@ -39,7 +39,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext checkext
 
-  "php-7.3":
+  "php-73":
     docker:
       - image: aimeos/ci-php:7.3
     steps:
@@ -56,7 +56,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
 
-  "php-7.4":
+  "php-74":
     docker:
       - image: aimeos/ci-php:7.4
     steps:
@@ -73,7 +73,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
 
-  "php-8.0":
+  "php-80":
     docker:
       - image: aimeos/ci-php:8.0
     steps:
@@ -90,7 +90,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
 
-  "php-8.1":
+  "php-81":
     docker:
       - image: aimeos/ci-php:8.1
     steps:
@@ -112,9 +112,9 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php-7.1"
-      - "php-7.2"
-      - "php-7.3"
-      - "php-7.4"
-      - "php-8.0"
-      - "php-8.1"
+      - "php-71"
+      - "php-72"
+      - "php-73"
+      - "php-74"
+      - "php-80"
+      - "php-81"
