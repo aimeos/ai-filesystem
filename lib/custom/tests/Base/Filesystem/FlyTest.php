@@ -24,7 +24,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object->expects( $this->once() )->method( 'getProvider' )
+		$this->object->expects( $this->any() )->method( 'getProvider' )
 			->will( $this->returnValue( $this->mock ) );
 	}
 
@@ -177,7 +177,10 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testHas()
 	{
-		$this->mock->expects( $this->once() )->method( 'has' )
+		$this->mock->expects( $this->once() )->method( 'fileExists' )
+			->will( $this->returnValue( false ) );
+
+		$this->mock->expects( $this->once() )->method( 'directoryExists' )
 			->will( $this->returnValue( true ) );
 
 		$result = $this->object->has( 'test' );
@@ -188,12 +191,25 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testHasFalse()
 	{
-		$this->mock->expects( $this->once() )->method( 'has' )
+		$this->mock->expects( $this->once() )->method( 'fileExists' )
+			->will( $this->returnValue( false ) );
+
+		$this->mock->expects( $this->once() )->method( 'directoryExists' )
 			->will( $this->returnValue( false ) );
 
 		$result = $this->object->has( 'test' );
 
 		$this->assertFalse( $result );
+	}
+
+
+	public function testHasException()
+	{
+		$this->mock->expects( $this->once() )->method( 'fileExists' )
+			->will( $this->throwException( new \RuntimeException() ) );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$this->object->has( 'test' );
 	}
 
 

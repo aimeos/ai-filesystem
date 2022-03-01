@@ -193,7 +193,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function has( string $path ) : bool
 	{
 		try {
-			return $this->getProvider()->has( $path );
+			return $this->getProvider()->fileExists( $path ) || $this->getProvider()->directoryExists( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
