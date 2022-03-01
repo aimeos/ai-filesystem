@@ -192,11 +192,23 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function has( string $path ) : bool
 	{
-		try {
-			return $this->getProvider()->fileExists( $path ) || $this->getProvider()->directoryExists( $path );
-		} catch( \Exception $e ) {
+		$result = false;
+
+		try
+		{
+			$provider = $this->getProvider();
+			$result = $provider->fileExists( $path );
+
+			if( !$result && method_exists( $provider, 'directoryExists' ) ) {
+				$result = $provider->directoryExists( $path );
+			}
+		}
+		catch( \Exception $e )
+		{
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
+
+		return $result;
 	}
 
 
@@ -375,17 +387,6 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		}
 
 		return $this;
-	}
-
-
-	/**
-	 * Returns the flysystem adapter
-	 *
-	 * @return \League\Flysystem\AdapterInterface Flysystem adapter
-	 */
-	protected function getAdapter()
-	{
-		return $this->getProvider()->getAdapter();
 	}
 
 
