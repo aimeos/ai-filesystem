@@ -89,7 +89,7 @@ jobs:
           key: php81-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem coverageext
-      - run: ./vendor/bin/php-coveralls --root_dir ext/ai-filesystem -v -x lib/custom/tests/coverage.xml
+      - run: ./vendor/bin/php-coveralls --root_dir ext/ai-filesystem -o cov.json -v -x lib/custom/tests/coverage.xml
 
 workflows:
   version: 2

@@ -178,9 +178,6 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testHas()
 	{
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
-			->will( $this->returnValue( false ) );
-
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
 			->will( $this->returnValue( true ) );
 
 		$result = $this->object->has( 'test' );
@@ -194,8 +191,11 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
 			->will( $this->returnValue( false ) );
 
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
-			->will( $this->returnValue( false ) );
+		if( method_exists( $this->mock, 'directoryExists' ) )
+		{
+			$this->mock->expects( $this->once() )->method( 'directoryExists' )
+				->will( $this->returnValue( false ) );
+		}
 
 		$result = $this->object->has( 'test' );
 
