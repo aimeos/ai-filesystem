@@ -210,7 +210,7 @@ Configuration:
 
 ### WebDAV
 
-Required adapter:
+Required adapter (PHP 8.x only):
 
 ```
 composer req league/flysystem-webdav
