@@ -7,7 +7,7 @@ class FlyAzureTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp() : void
 	{
-		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+		if( !class_exists( '\\League\\Flysystem\\Filesystem' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
 		}
 	}
@@ -15,13 +15,14 @@ class FlyAzureTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProvider()
 	{
-		if( !class_exists( '\League\Flysystem\Azure\AzureAdapter' ) ) {
+		if( !class_exists( '\League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter' ) ) {
 			$this->markTestSkipped( 'Install Flysystem Azure adapter' );
 		}
 
-		$object = new FlyAzure( [] );
+		$object = new FlyAzure( ['endpoint' => 'test', 'container' => 'test'] );
 		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
 
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
 }

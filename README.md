@@ -25,211 +25,227 @@ As every Aimeos extension, the easiest way is to install it via [composer](https
 php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
 ```
 
-Add the filesystem extension name to the "require" section of your ```composer.json``` (or your ```composer.aimeos.json```, depending on what is available) file:
-```
-"require": [
-    "aimeos/ai-filesystem": "dev-master",
-    ...
-],
-```
+Then, install the extension using composer:
 
-Afterwards you only need to execute the composer update command on the command line:
 ```
-composer update
+composer req aimeos/ai-filesystem
 ```
-
-These commands will install the Aimeos extension into the extension directory and it will be available immediately.
 
 ## Configuration
 
 All file system adapter are configured below the ```resource/fs``` configuration key, e.g. in the resource section of your config file:
+
 ```
-'resource' => array(
-	'fs' => array(
+'resource' => [
+	'fs' => [
 		// file system adapter specific configuration
-	),
-),
+	],
+],
 ```
 
 ### Amazon S3
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-aws-s3-v3
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyAwsS3',
-	'credentials' => array(
-		'key'    => 'your-key',
+	'credentials' => [
+		'key' => 'your-key',
 		'secret' => 'your-secret',
-	),
+	],
 	'region' => 'your-region',
 	'version' => 'latest|api-version',
 	'bucket' => 'your-bucket-name',
 	'prefix' => 'your-prefix', // optional
-),
+],
 ```
 
 ### Azure
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-azure-blob-storage
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyAzure',
 	'endpoint' => 'DefaultEndpointsProtocol=https;AccountName=your-account;AccountKey=your-api-key',
 	'container' => 'your-container',
-),
-```
-
-### Copy.com
-
-```
-'fs' => array(
-	'adapter' => 'FlyCopy',
-	'consumerkey' => 'your-consumer-key',
-	'consumersecret' => 'your-consumer-secret',
-	'accesstoken' => 'your-access-token',
-	'tokensecret' => 'your-token-secret',
 	'prefix' => 'your-prefix', // optional
-),
+],
 ```
 
 ### Dropbox
 
-Visit https://www.dropbox.com/developers/apps and get your "app secret".
-You can also generate an OAuth access token for testing by using the Dropbox App Console without going through the authorization steps.
+Required adapter:
 
 ```
-'fs' => array(
+composer req spatie/flysystem-dropbox
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyDropbox',
-	'accesstoken' => 'your-access-token',
-	'appsecret' => 'your-app-secret',
-	'prefix' => 'your-prefix', // optional
-),
+	'accesstoken' => 'your-access-token'
+],
 ```
 
 ### FTP
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-ftp
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyFtp',
 	'host' => 'your-hostname-or-ipaddress',
 	'username' => 'your-username',
 	'password' => 'your-password',
+	'root' => '/path/to/basedir',
 	'port' => 21, // optional
-	'root' => '/path/to/basedir', // optional
 	'passive' => true, // optional
 	'ssl' => true, // optional
 	'timeout' => 30, // optional
-),
+	'utf8' => false, // optional
+	'transferMode' => FTP_BINARY, // optional
+	'systemType' => null, // 'windows' or 'unix'
+	'ignorePassiveAddress' => null, // true or false
+	'timestampsOnUnixListingsEnabled' => false, // true or false
+	'recurseManually' => true // true
+],
 ```
 
-### GridFS
+### Google Cloud
+
+Required adapter:
 
 ```
-'fs' => array(
-	'adapter' => 'FlyGridfs',
-	'dbname' => 'your-database-name',
-),
+composer req league/flysystem-google-cloud-storage
 ```
+
+Configuration:
+
+```
+'fs' => [
+	'adapter' => 'FlyGoogleCloud',
+	'keyFile' => json_decode(file_get_contents('/path/to/keyfile.json'), true), // alternative
+	'keyFilePath' => '/path/to/keyfile.json', // alternative
+	'projectId' => 'myProject', // alternative
+	'prefix' => 'your-prefix' // optional
+],
+```
+
+For authentication details, have a look at the [Google Cloud client documentation](https://github.com/googleapis/google-cloud-php/blob/main/AUTHENTICATION.md).
 
 ### Local
 
+Configuration:
+
 ```
-'fs' => array(
+'fs' => [
 	'adapter' => 'FlyLocal',
 	'basedir' => 'your-basedir-path',
-),
+],
 ```
 
 ### Memory
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-memory
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyMemory',
-),
-```
-
-### None / Blackhole
-
-```
-'fs' => array(
-	'adapter' => 'FlyNone',
-),
-```
-
-### PHPCR
-
-Content repository stored in a database. Depending on the driver, you have to use different [DBAL connection settings](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html).
-```
-'fs' => array(
-	'adapter' => 'FlyPhpcr',
-	'root' => 'your-phpcr-root',
-	'driver' => 'pdo_sqlite', // can be also pdo_mysql or other database drivers
-	'path'   => '/path/to/sqlite.db', // use driver specific DBAL configuration option instead
-),
-```
-
-### Rackspace
-
-```
-'fs' => array(
-	'adapter' => 'FlyRackspace',
-	'username' => 'your-username',
-	'password' => 'your-password',
-	'container' => 'your-container',
-),
-```
-
-### Replicate
-
-```
-'fs' => array(
-	'adapter' => 'FlyReplicate',
-	'source' => array(
-		'adapter' => '...', // one of the other supported adapters
-		// adapter specific configuration options
-	),
-	'replica' => array(
-		'adapter' => '...', // one of the other supported adapters
-		// adapter specific configuration options
-	),
-),
+],
 ```
 
 ### SFTP
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-sftp
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlySftp',
-    'host' => 'your-hostname-or-ipaddress',
-    'port' => 21, // optional
+	'host' => 'your-hostname-or-ipaddress',
+	'port' => 22, // optional
 	'username' => 'your-username', // optional
 	'password' => 'your-password', // optional
-    'privateKey' => 'path/to/or/contents/of/private/key', // optional
-    'root' => '/path/to/basedir', // optional
-    'timeout' => 10, // optional
-),
+	'privateKey' => 'path/to/or/contents/of/private/key', // optional
+	'passphrase' => 'passphrase-for-the-private-key', // optional
+	'fingerprint' => 'fingerprint-string', // optional
+	'timeout' => 10, // optional
+	'retry' => 4, // optional
+	'agent' => true // optional
+],
 ```
 
 ### WebDAV
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-webdav
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyWebdav',
-    'baseUri' => 'your-webdav-uri',
-    'proxy' => 'your-proxy', // optional
+	'baseUri' => 'your-webdav-uri',
+	'proxy' => 'your-proxy', // optional
 	'userName' => 'your-username', // optional
 	'password' => 'your-password', // optional
-    'authType' => 'authentication-type', // optional, 1=Basic, 2=Digest, 4=NTLM
-    'encoding' => 'encoding-type', // optional, 1=None, 2=Deflate, 4=Gzip, 7=All
+	'authType' => 'authentication-type', // optional, 1=Basic, 2=Digest, 4=NTLM
+	'encoding' => 'encoding-type', // optional, 1=None, 2=Deflate, 4=Gzip, 7=All
 	'prefix' => 'your-prefix', // optional
-),
+],
 ```
 
 ### Zip archive
 
+Required adapter:
+
 ```
-'fs' => array(
+composer req league/flysystem-ziparchive
+```
+
+Configuration:
+
+```
+'fs' => [
 	'adapter' => 'FlyZip',
-    'filepath' => '/path/to/zipfile',
-),
+	'filepath' => '/path/to/zipfile',
+],
 ```
 
 ## License

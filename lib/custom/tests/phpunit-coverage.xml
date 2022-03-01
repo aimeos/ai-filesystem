@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit bootstrap="bootstrap.php">
-	<filter>
-		<whitelist>
-			<directory suffix=".php">../src</directory>
-		</whitelist>
-	</filter>
+	<testsuites>
+		<testsuite name="Base suite">
+			<directory>Base/</directory>
+		</testsuite>
+	</testsuites>
 	<logging>
 		<log type="coverage-clover" target="coverage.xml"/>
 	</logging>

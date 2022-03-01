@@ -11,7 +11,7 @@
 namespace Aimeos\Base\Filesystem;
 
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 
 
 /**
@@ -40,7 +40,7 @@ class FlyLocal extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'basedir' ) );
 			}
 
-			$adapter = new Local( $config['basedir'], LOCK_EX, Local::SKIP_LINKS, $config );
+			$adapter = new LocalFilesystemAdapter( $config['basedir'] );
 			$this->fs = new Filesystem( $adapter );
 		}
 

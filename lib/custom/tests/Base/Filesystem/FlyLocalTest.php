@@ -7,7 +7,9 @@ class FlyLocalTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp() : void
 	{
-		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+		if( !class_exists( '\\League\\Flysystem\\Filesystem' )
+			|| !class_exists( '\\League\\Flysystem\\Local\\LocalFilesystemAdapter' )
+		) {
 			$this->markTestSkipped( 'Install Flysystem first' );
 		}
 	}

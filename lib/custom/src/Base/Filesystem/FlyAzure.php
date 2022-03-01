@@ -10,8 +10,8 @@
 
 namespace Aimeos\Base\Filesystem;
 
-use WindowsAzure\Common\ServicesBuilder;
-use League\Flysystem\Azure\AzureAdapter;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
 use League\Flysystem\Filesystem;
 
 
@@ -45,8 +45,9 @@ class FlyAzure extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'container' ) );
 			}
 
-			$service = ServicesBuilder::getInstance()->createBlobService( $config['endpoint'] );
-			$this->fs = new Filesystem( new AzureAdapter( $service, $config['container'] ) );
+			$service = BlobRestProxy::createBlobService( $config['endpoint'] );
+			$adapter = new AzureBlobStorageAdapter( $service, $config['container'], $config['prefix'] ?? '' );
+			$this->fs = new Filesystem( $adapter );
 		}
 
 		return $this->fs;

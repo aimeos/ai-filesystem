@@ -10,9 +10,9 @@
 
 namespace Aimeos\Base\Filesystem;
 
-use Dropbox\Client;
+use Spatie\Dropbox\Client;
+use Spatie\FlysystemDropbox\DropboxAdapter;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Dropbox\DropboxAdapter;
 
 
 /**
@@ -41,14 +41,8 @@ class FlyDropbox extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'accesstoken' ) );
 			}
 
-			if( !isset( $config['appsecret'] ) ) {
-				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'appsecret' ) );
-			}
-
-			$prefix = ( isset( $config['prefix'] ) ? $config['prefix'] : null );
-
-			$client = new Client( $config['accesstoken'], $config['appsecret'] );
-			$this->fs = new Filesystem( new DropboxAdapter( $client, $prefix ) );
+			$client = new Client( $config['accesstoken'] );
+			$this->fs = new Filesystem( $adapter = new DropboxAdapter( $client ), ['case_sensitive' => false] );
 		}
 
 		return $this->fs;

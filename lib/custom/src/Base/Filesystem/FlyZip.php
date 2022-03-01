@@ -12,6 +12,7 @@ namespace Aimeos\Base\Filesystem;
 
 use League\Flysystem\Filesystem;
 use League\Flysystem\ZipArchive\ZipArchiveAdapter;
+use League\Flysystem\ZipArchive\FilesystemZipArchiveProvider;
 
 
 /**
@@ -40,7 +41,7 @@ class FlyZip extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'filepath' ) );
 			}
 
-			$this->fs = new Filesystem( new ZipArchiveAdapter( $config['filepath'] ) );
+			$this->fs = new Filesystem( new ZipArchiveAdapter( new FilesystemZipArchiveProvider( $config['filepath'] ) ) );
 		}
 
 		return $this->fs;

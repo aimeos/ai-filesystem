@@ -35,10 +35,13 @@ class FlyWebdav extends FlyBase implements Iface, DirIface, MetaIface
 		if( !isset( $this->fs ) )
 		{
 			$config = $this->getConfig();
-			$prefix = ( isset( $config['prefix'] ) ? $config['prefix'] : null );
+
+			if( !isset( $config['baseUri'] ) ) {
+				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'baseUri' ) );
+			}
 
 			$client = new \Sabre\DAV\Client( $config );
-			$this->fs = new Filesystem( new WebDAVAdapter( $client, $prefix ) );
+			$this->fs = new Filesystem( new WebDAVAdapter( $client ) );
 		}
 
 		return $this->fs;

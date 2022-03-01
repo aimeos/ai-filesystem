@@ -33,7 +33,7 @@ class FlyMemory extends FlyBase implements Iface, DirIface, MetaIface
 	protected function getProvider()
 	{
 		if( !isset( $this->fs ) ) {
-			$this->fs = new Filesystem( new MemoryAdapter() );
+			$this->fs = new Filesystem( new \League\Flysystem\InMemory\InMemoryFilesystemAdapter() );
 		}
 
 		return $this->fs;

@@ -6,7 +6,4 @@
 			<directory>Base/</directory>
 		</testsuite>
 	</testsuites>
-	<logging>
-		<log type="junit" target="ai-filesystem_lib-custom_test.junit.xml" />
-	</logging>
 </phpunit>

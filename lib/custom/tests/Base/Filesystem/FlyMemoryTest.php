@@ -7,18 +7,18 @@ class FlyMemoryTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp() : void
 	{
-		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+		if( !class_exists( '\\League\\Flysystem\\Filesystem' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
+		}
+
+		if( !class_exists( '\League\Flysystem\InMemory\InMemoryFilesystemAdapter' ) ) {
+			$this->markTestSkipped( 'Install Flysystem memory adapter' );
 		}
 	}
 
 
 	public function testGetProvider()
 	{
-		if( !class_exists( '\League\Flysystem\Memory\MemoryAdapter' ) ) {
-			$this->markTestSkipped( 'Install Flysystem memory adapter' );
-		}
-
 		$object = new FlyMemory( [] );
 		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
 

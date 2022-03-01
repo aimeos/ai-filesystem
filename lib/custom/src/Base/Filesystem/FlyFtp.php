@@ -11,7 +11,7 @@
 namespace Aimeos\Base\Filesystem;
 
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Ftp as FtpAdapter;
+use League\Flysystem\Ftp\FtpAdapter;
 
 
 /**
@@ -34,8 +34,8 @@ class FlyFtp extends FlyBase implements Iface, DirIface, MetaIface
 	{
 		if( !isset( $this->fs ) )
 		{
-			$config = $this->getConfig();
-			$this->fs = new Filesystem( new FtpAdapter( $config ) );
+			$options = \League\Flysystem\Ftp\FtpConnectionOptions::fromArray( $this->getConfig() );
+			$this->fs = new Filesystem( new FtpAdapter( $options ) );
 		}
 
 		return $this->fs;

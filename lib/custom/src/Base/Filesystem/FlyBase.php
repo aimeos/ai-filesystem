@@ -30,8 +30,6 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function __construct( array $config )
 	{
-		$this->config = $config;
-
 		if( !isset( $config['tempdir'] ) ) {
 			$config['tempdir'] = sys_get_temp_dir();
 		}
@@ -42,6 +40,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 
 		$ds = DIRECTORY_SEPARATOR;
 		$this->tempdir = realpath( str_replace( '/', $ds, rtrim( $config['tempdir'], '/' ) ) ) . $ds;
+		$this->config = $config;
 	}
 
 
@@ -54,10 +53,12 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function isdir( string $path ) : bool
 	{
-		$result = $this->getProvider()->getMetadata( $path );
-
-		if( $result['type'] === 'dir' ) {
-			return true;
+		try {
+			foreach( $this->getProvider()->listContents( $path ) as $attr ) {
+				return $attr->isDir();
+			}
+		} catch( \Exception $e ) {
+			throw new Exception( $e->getMessage(), 0, $e );
 		}
 
 		return false;
@@ -73,8 +74,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function mkdir( string $path ) : DirIface
 	{
-		if( $this->getProvider()->createDir( $path ) === false ) {
-			throw new Exception( $path );
+		try {
+			$this->getProvider()->createDirectory( $path );
+		} catch( \Exception $e ) {
+			throw new Exception( $e->getMessage(), 0, $e );
 		}
 
 		return $this;
@@ -90,8 +93,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function rmdir( string $path ) : DirIface
 	{
-		if( $this->getProvider()->deleteDir( $path ) === false ) {
-			throw new Exception( $path );
+		try {
+			$this->getProvider()->deleteDirectory( $path );
+		} catch( \Exception $e ) {
+			throw new Exception( $e->getMessage(), 0, $e );
 		}
 
 		return $this;
@@ -111,8 +116,15 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	{
 		$list = [];
 
-		foreach( $this->getProvider()->listContents( $path ) as $entry ) {
-			$list[] = $entry['basename'];
+		try
+		{
+			foreach( $this->getProvider()->listContents( (string) $path ) as $attr ) {
+				$list[] = basename( $attr->path() );
+			}
+		}
+		catch( \Exception $e )
+		{
+			throw new Exception( $e->getMessage(), 0, $e );
 		}
 
 		return $list;
@@ -129,16 +141,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function size( string $path ) : int
 	{
 		try {
-			$size = $this->getProvider()->getSize( $path );
+			return $this->getProvider()->fileSize( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
-
-		if( $size === false ) {
-			throw new Exception( $path );
-		}
-
-		return $size;
 	}
 
 
@@ -152,16 +158,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function time( string $path ) : int
 	{
 		try {
-			$time = $this->getProvider()->getTimestamp( $path );
+			return $this->getProvider()->lastModified( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
-
-		if( $time === false ) {
-			throw new Exception( $path );
-		}
-
-		return $time;
 	}
 
 
@@ -192,7 +192,11 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function has( string $path ) : bool
 	{
-		return $this->getProvider()->has( $path );
+		try {
+			return $this->getProvider()->has( $path );
+		} catch( \Exception $e ) {
+			throw new Exception( $e->getMessage(), 0, $e );
+		}
 	}
 
 
@@ -208,16 +212,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function read( string $path ) : string
 	{
 		try {
-			$content = $this->getProvider()->read( $path );
+			return $this->getProvider()->read( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
-
-		if( $content === false ) {
-			throw new Exception( $path );
-		}
-
-		return $content;
 	}
 
 
@@ -263,16 +261,10 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function reads( string $path )
 	{
 		try {
-			$handle = $this->getProvider()->readStream( $path );
+			return $this->getProvider()->readStream( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
-
-		if( $handle === false ) {
-			throw new Exception( $path );
-		}
-
-		return $handle;
 	}
 
 
@@ -289,13 +281,9 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function write( string $path, string $content ) : Iface
 	{
 		try {
-			$result = $this->getProvider()->put( $path, $content );
+			$this->getProvider()->write( $path, $content );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
-		}
-
-		if( $result === false ) {
-			throw new Exception( $path );
 		}
 
 		return $this;
@@ -341,13 +329,9 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function writes( string $path, $stream ) : Iface
 	{
 		try {
-			$result = $this->getProvider()->putStream( $path, $stream );
+			$this->getProvider()->writeStream( $path, $stream );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
-		}
-
-		if( $result === false ) {
-			throw new Exception( $path );
 		}
 
 		return $this;
@@ -365,13 +349,9 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function move( string $from, string $to ) : Iface
 	{
 		try {
-			$result = $this->getProvider()->rename( $from, $to );
+			$this->getProvider()->move( $from, $to );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
-		}
-
-		if( $result === false ) {
-			throw new Exception( sprintf( 'Error moving "%1$s" to "%2$s"', $from, $to ) );
 		}
 
 		return $this;
@@ -389,13 +369,9 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	public function copy( string $from, string $to ) : Iface
 	{
 		try {
-			$result = $this->getProvider()->copy( $from, $to );
+			$this->getProvider()->copy( $from, $to );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
-		}
-
-		if( $result === false ) {
-			throw new Exception( sprintf( 'Error copying "%1$s" to "%2$s"', $from, $to ) );
 		}
 
 		return $this;

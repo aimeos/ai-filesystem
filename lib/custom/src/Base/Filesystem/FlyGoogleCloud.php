@@ -10,9 +10,9 @@
 
 namespace Aimeos\Base\Filesystem;
 
-use Aws\S3\S3Client;
 use League\Flysystem\Filesystem;
-use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
+use League\Flysystem\GoogleCloudStorage\GoogleCloudStorageAdapter;
+use Google\Cloud\Storage\StorageClient;
 
 
 /**
@@ -21,7 +21,7 @@ use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
  * @package Base
  * @subpackage Filesystem
  */
-class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
+class FlyGoogleCloud extends FlyBase implements Iface, DirIface, MetaIface
 {
 	private $fs;
 
@@ -41,8 +41,9 @@ class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'bucket' ) );
 			}
 
-			$client = S3Client::factory( $config );
-			$adapter = new AwsS3V3Adapter( $client, $config['bucket'], $config['prefix'] ?? '' );
+			$client = new StorageClient( $config );
+			$bucket = $storageClient->bucket( $config['bucket'] );
+			$adapter = new GoogleCloudStorageAdapter( $bucket, $config['prefix'] ?? '' );
 			$this->fs = new Filesystem( $adapter );
 		}
 

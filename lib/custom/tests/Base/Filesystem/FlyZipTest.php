@@ -7,7 +7,7 @@ class FlyZipTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp() : void
 	{
-		if( !interface_exists( '\\League\\Flysystem\\FilesystemInterface' ) ) {
+		if( !class_exists( '\\League\\Flysystem\\Filesystem' ) ) {
 			$this->markTestSkipped( 'Install Flysystem first' );
 		}
 	}
