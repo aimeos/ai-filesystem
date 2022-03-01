@@ -69,7 +69,7 @@ Configuration:
 
 ### Azure
 
-Required adapter:
+Required adapter (PHP 8.x only):
 
 ```
 composer req league/flysystem-azure-blob-storage

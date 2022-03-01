@@ -29,7 +29,7 @@ class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
 	/**
 	 * Returns the file system provider
 	 *
-	 * @return \League\Flysystem\FilesystemInterface File system provider
+	 * @return \League\Flysystem\Filesystem File system provider
 	 */
 	protected function getProvider()
 	{

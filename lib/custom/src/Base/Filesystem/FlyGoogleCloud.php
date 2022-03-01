@@ -29,7 +29,7 @@ class FlyGoogleCloud extends FlyBase implements Iface, DirIface, MetaIface
 	/**
 	 * Returns the file system provider
 	 *
-	 * @return \League\Flysystem\FilesystemInterface File system provider
+	 * @return \League\Flysystem\Filesystem File system provider
 	 */
 	protected function getProvider()
 	{
@@ -42,7 +42,7 @@ class FlyGoogleCloud extends FlyBase implements Iface, DirIface, MetaIface
 			}
 
 			$client = new StorageClient( $config );
-			$bucket = $storageClient->bucket( $config['bucket'] );
+			$bucket = $client->bucket( $config['bucket'] );
 			$adapter = new GoogleCloudStorageAdapter( $bucket, $config['prefix'] ?? '' );
 			$this->fs = new Filesystem( $adapter );
 		}
