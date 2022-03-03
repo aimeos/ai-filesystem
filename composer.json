@@ -23,10 +23,18 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Aimeos\\": "lib/custom/src/"
+			"Aimeos\\": "src"
 		},
 		"classmap": [
-			"lib/custom/src"
+			"src"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Aimeos\\": "tests"
+		},
+		"classmap": [
+			"tests"
 		]
 	}
 }

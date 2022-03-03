@@ -3,7 +3,6 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2022
  */
 class TestHelper
@@ -21,15 +20,14 @@ class TestHelper
 	}
 
 
-	private static function getAimeos()
+	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Bootstrap.php';
-			spl_autoload_register( '\Aimeos\Bootstrap::autoload' );
+			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
-			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
