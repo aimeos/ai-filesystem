@@ -25,4 +25,24 @@ class FlyAzureTest extends \PHPUnit\Framework\TestCase
 		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
 		$object->has( 'test' );
 	}
+
+
+	public function testGetProviderNoEndpoint()
+	{
+		$object = new FlyAzure( [] );
+		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$object->has( 'test' );
+	}
+
+
+	public function testGetProviderNoContainer()
+	{
+		$object = new FlyAzure( ['endpoint' => 'test'] );
+		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$object->has( 'test' );
+	}
 }

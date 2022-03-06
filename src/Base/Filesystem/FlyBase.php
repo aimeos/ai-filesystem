@@ -34,7 +34,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 			$config['tempdir'] = sys_get_temp_dir();
 		}
 
-		if( !is_dir( $config['tempdir'] ) && mkdir( $config['tempdir'], 0755, true ) === false ) {
+		if( !is_dir( $config['tempdir'] ) && @mkdir( $config['tempdir'], 0755, true ) === false ) {
 			throw new Exception( sprintf( 'Directory "%1$s" could not be created', $config['tempdir'] ) );
 		}
 
@@ -235,17 +235,18 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * Reads the content of the remote file and writes it to a local one
 	 *
 	 * @param string $path Path to the remote file
+	 * @param string|null $local Path to the local file (optional)
 	 * @return string Path of the local file
 	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
-	public function readf( string $path ) : string
+	public function readf( string $path, string $local = null ) : string
 	{
-		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
+		if( $local === null && ( $local = @tempnam( $this->tempdir, 'ai-' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
 		}
 
-		if( ( $handle = @fopen( $filename, 'w' ) ) === false ) {
-			throw new Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
+		if( ( $handle = @fopen( $local, 'w' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
 		}
 
 		$stream = $this->reads( $path );
@@ -257,7 +258,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 		fclose( $stream );
 		fclose( $handle );
 
-		return $filename;
+		return $local;
 	}
 
 
@@ -308,7 +309,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * {@inheritDoc}
 	 *
 	 * @param string $path Path to the remote file
-	 * @param string $file Path to the local file
+	 * @param string $local Path to the local file
 	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */

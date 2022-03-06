@@ -35,6 +35,13 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testConstructException()
+	{
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		new \Aimeos\Base\Filesystem\FlyLocal( ['tempdir' => '/test'] );
+	}
+
+
 	public function testIsdir()
 	{
 		$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
@@ -60,6 +67,16 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( $listStub ) );
 
 		$this->assertFalse( $this->object->isdir( 'test' ) );
+	}
+
+
+	public function testIsdirException()
+	{
+		$this->object->expects( $this->any() )->method( 'getProvider' )
+			->will( $this->throwException( new \RuntimeException() ) );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$this->assertTrue( $this->object->isdir( 'test' ) );
 	}
 
 
@@ -114,6 +131,16 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( $listStub ) );
 
 		$this->assertEquals( ['test'], $this->object->scan() );
+	}
+
+
+	public function testScanException()
+	{
+		$this->object->expects( $this->any() )->method( 'getProvider' )
+			->will( $this->throwException( new \RuntimeException() ) );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$this->assertTrue( $this->object->scan( 'test' ) );
 	}
 
 
@@ -299,6 +326,13 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 		unlink( $file );
 		$this->assertInstanceOf( \Aimeos\Base\Filesystem\Iface::class, $object );
+	}
+
+
+	public function testWritefException()
+	{
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$this->object->writef( 'file', '/test' );
 	}
 
 

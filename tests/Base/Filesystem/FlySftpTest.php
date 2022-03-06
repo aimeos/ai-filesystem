@@ -24,4 +24,34 @@ class FlySftpTest extends \PHPUnit\Framework\TestCase
 
 		$object->has( 'test' );
 	}
+
+
+	public function testGetProviderNoHost()
+	{
+		$object = new FlySftp( [] );
+		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$object->has( 'test' );
+	}
+
+
+	public function testGetProviderNoUser()
+	{
+		$object = new FlySftp( ['host' => 'test.rebex.net'] );
+		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$object->has( 'test' );
+	}
+
+
+	public function testGetProviderNoRoot()
+	{
+		$object = new FlySftp( ['host' => 'test.rebex.net', 'username' => 'demo', 'password' => 'password'] );
+		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
+
+		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
+		$object->has( 'test' );
+	}
 }
