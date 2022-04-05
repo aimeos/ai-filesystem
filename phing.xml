@@ -29,6 +29,14 @@
 		</delete>
 	</target>
 
+	<target name="i18n" description="Creates translation message files">
+		<echo msg="Nothing to do" />
+	</target>
+
+	<target name="build" description="Creates translation message files">
+		<echo msg="Nothing to do" />
+	</target>
+
 	<target name="all" depends="coverage,check" description="Builds all parts of the package">
 	</target>
 
