@@ -5,57 +5,6 @@
 version: 2.1
 
 jobs:
-  "php-72":
-    docker:
-      - image: aimeos/ci-php:7.2
-    steps:
-      - checkout
-      - run: git clone --depth=50 --branch=master https://github.com/aimeos/aimeos-core ../aimeos-core
-      - run: cd .. && mv project aimeos-core/ext/ai-filesystem && mv aimeos-core project && cd project
-      - restore_cache:
-          keys:
-            - php72-{{ checksum "composer.json" }}
-      - run: composer req --no-update league/flysystem-aws-s3-v3 spatie/flysystem-dropbox league/flysystem-google-cloud-storage league/flysystem-ftp league/flysystem-memory league/flysystem-sftp league/flysystem-ziparchive
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php72-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext checkext
-
-  "php-73":
-    docker:
-      - image: aimeos/ci-php:7.3
-    steps:
-      - checkout
-      - run: git clone --depth=50 --branch=master https://github.com/aimeos/aimeos-core ../aimeos-core
-      - run: cd .. && mv project aimeos-core/ext/ai-filesystem && mv aimeos-core project && cd project
-      - restore_cache:
-          keys:
-            - php73-{{ checksum "composer.json" }}
-      - run: composer req --no-update league/flysystem-aws-s3-v3 spatie/flysystem-dropbox league/flysystem-google-cloud-storage league/flysystem-ftp league/flysystem-memory league/flysystem-sftp league/flysystem-ziparchive
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php73-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
-
-  "php-74":
-    docker:
-      - image: aimeos/ci-php:7.4
-    steps:
-      - checkout
-      - run: git clone --depth=50 --branch=master https://github.com/aimeos/aimeos-core ../aimeos-core
-      - run: cd .. && mv project aimeos-core/ext/ai-filesystem && mv aimeos-core project && cd project
-      - restore_cache:
-          keys:
-            - php74-{{ checksum "composer.json" }}
-      - run: composer req --no-update league/flysystem-aws-s3-v3 spatie/flysystem-dropbox league/flysystem-google-cloud-storage league/flysystem-ftp league/flysystem-memory league/flysystem-sftp league/flysystem-ziparchive
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php74-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: ./vendor/bin/phing -Ddir=ext/ai-filesystem testext
-
   "php-80":
     docker:
       - image: aimeos/ci-php:8.0
@@ -112,9 +61,6 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php-72"
-      - "php-73"
-      - "php-74"
       - "php-80"
       - "php-81"
       - "php-82"
