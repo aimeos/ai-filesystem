@@ -17,7 +17,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 		$this->object = $this->getMockBuilder( '\\Aimeos\\Base\\Filesystem\\FlyLocal' )
 			->setConstructorArgs( array( array( 'adapter' => 'FlyLocal' ) ) )
-			->setMethods( array( 'getProvider' ) )
+			->onlyMethods( array( 'getProvider' ) )
 			->getMock();
 
 		$this->mock = $this->getMockBuilder( '\\League\\Flysystem\\Filesystem' )
@@ -46,7 +46,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	{
 		$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
 			->setConstructorArgs( [[new \League\Flysystem\DirectoryAttributes( 'test' )]] )
-			->setMethods( ['filter'] )
+			->onlyMethods( ['filter'] )
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
@@ -60,7 +60,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	{
 		$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
 			->setConstructorArgs( [[new \League\Flysystem\FileAttributes( 'test' )]] )
-			->setMethods( ['filter'] )
+			->onlyMethods( ['filter'] )
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
@@ -124,7 +124,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	{
 		$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
 			->setConstructorArgs( [[new \League\Flysystem\FileAttributes( 'test' )]] )
-			->setMethods( ['filter'] )
+			->onlyMethods( ['filter'] )
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
