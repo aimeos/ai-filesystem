@@ -22,7 +22,7 @@ use League\Flysystem\Ftp\FtpAdapter;
  */
 class FlyFtp extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

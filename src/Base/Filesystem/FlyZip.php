@@ -23,7 +23,7 @@ use League\Flysystem\ZipArchive\FilesystemZipArchiveProvider;
  */
 class FlyZip extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

@@ -23,7 +23,7 @@ use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
  */
 class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**
@@ -39,6 +39,10 @@ class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
 
 			if( !isset( $config['bucket'] ) ) {
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'bucket' ) );
+			}
+
+			if( !isset( $config['region'] ) ) {
+				$config['region'] = null;
 			}
 
 			$client = S3Client::factory( $config );

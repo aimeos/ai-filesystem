@@ -22,7 +22,7 @@ use League\Flysystem\WebDAV\WebDAVAdapter;
  */
 class FlyWebdav extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

@@ -23,7 +23,7 @@ use Google\Cloud\Storage\StorageClient;
  */
 class FlyGoogleCloud extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

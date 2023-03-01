@@ -23,7 +23,7 @@ use League\Flysystem\Filesystem;
  */
 class FlyAzure extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

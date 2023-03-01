@@ -23,7 +23,7 @@ use League\Flysystem\Filesystem;
  */
 class FlyDropbox extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

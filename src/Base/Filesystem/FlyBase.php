@@ -19,8 +19,8 @@ namespace Aimeos\Base\Filesystem;
  */
 abstract class FlyBase implements Iface, DirIface, MetaIface
 {
-	private $config;
-	private $tempdir;
+	private array $config;
+	private string $tempdir;
 
 
 	/**

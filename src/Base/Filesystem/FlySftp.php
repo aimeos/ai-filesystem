@@ -24,7 +24,7 @@ use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
  */
 class FlySftp extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

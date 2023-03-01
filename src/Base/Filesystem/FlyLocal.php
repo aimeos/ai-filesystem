@@ -22,7 +22,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
  */
 class FlyLocal extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**

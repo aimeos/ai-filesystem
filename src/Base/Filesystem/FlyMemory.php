@@ -22,7 +22,7 @@ use League\Flysystem\Memory\MemoryAdapter;
  */
 class FlyMemory extends FlyBase implements Iface, DirIface, MetaIface
 {
-	private $fs;
+	private ?Filesystem $fs = null;
 
 
 	/**
