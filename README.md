@@ -64,6 +64,7 @@ Configuration:
 	'version' => 'latest|api-version',
 	'bucket' => 'your-bucket-name',
 	'prefix' => 'your-prefix', // optional
+	'baseurl' => 'https://your-s3-endpoint' // 'https://bucket-name.s3.us-east-2.amazonaws.com'
 ],
 ```
 
