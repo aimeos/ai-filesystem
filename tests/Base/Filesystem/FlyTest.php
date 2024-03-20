@@ -25,7 +25,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->object->expects( $this->any() )->method( 'getProvider' )
-			->will( $this->returnValue( $this->mock ) );
+			->willReturn( $this->mock );
 	}
 
 
@@ -50,7 +50,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
-			->will( $this->returnValue( $listStub ) );
+			->willReturn( $listStub );
 
 		$this->assertTrue( $this->object->isdir( 'test' ) );
 	}
@@ -64,7 +64,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
-			->will( $this->returnValue( $listStub ) );
+			->willReturn( $listStub );
 
 		$this->assertFalse( $this->object->isdir( 'test' ) );
 	}
@@ -128,7 +128,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'listContents' )
-			->will( $this->returnValue( $listStub ) );
+			->willReturn( $listStub );
 
 		$this->assertEquals( ['test'], $this->object->scan() );
 	}
@@ -147,7 +147,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testSize()
 	{
 		$this->mock->expects( $this->once() )->method( 'fileSize' )
-			->will( $this->returnValue( 4 ) );
+			->willReturn( 4 );
 
 		$this->assertEquals( 4, $this->object->size( 'test' ) );
 	}
@@ -166,7 +166,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testTime()
 	{
 		$this->mock->expects( $this->once() )->method( 'lastModified' )
-			->will( $this->returnValue( 4 ) );
+			->willReturn( 4 );
 
 		$this->assertEquals( 4, $this->object->time( 'test' ) );
 	}
@@ -205,7 +205,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testHas()
 	{
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$result = $this->object->has( 'test' );
 
@@ -216,12 +216,12 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testHasFalse()
 	{
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		if( method_exists( $this->mock, 'directoryExists' ) )
 		{
 			$this->mock->expects( $this->once() )->method( 'directoryExists' )
-				->will( $this->returnValue( false ) );
+				->willReturn( false );
 		}
 
 		$result = $this->object->has( 'test' );
@@ -243,7 +243,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testRead()
 	{
 		$this->mock->expects( $this->once() )->method( 'read' )
-			->will( $this->returnValue( 'value' ) );
+			->willReturn( 'value' );
 
 		$this->assertEquals( 'value', $this->object->read( 'test' ) );
 	}
@@ -265,7 +265,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		file_put_contents( $file, 'test' );
 
 		$this->mock->expects( $this->once() )->method( 'readStream' )
-			->will( $this->returnValue( fopen( $file, 'r' ) ) );
+			->willReturn( fopen( $file, 'r' ) );
 
 		$result = $this->object->readf( 'file' );
 
@@ -279,7 +279,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 	public function testReads()
 	{
 		$this->mock->expects( $this->once() )->method( 'readStream' )
-			->will( $this->returnValue( 1 ) );
+			->willReturn( 1 );
 
 		$this->assertEquals( 1, $this->object->reads( 'test' ) );
 	}
@@ -358,8 +358,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testMove()
 	{
-		$this->mock->expects( $this->once() )->method( 'move' )
-			->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'move' );
 
 		$object = $this->object->move( 'file1', 'file2' );
 
