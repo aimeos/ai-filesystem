@@ -112,7 +112,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return iterable Iterator over the entries or array with entries
 	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
-	public function scan( string $path = null ) : iterable
+	public function scan( ?string $path = null ) : iterable
 	{
 		$list = [];
 
@@ -239,7 +239,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 * @return string Path of the local file
 	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
-	public function readf( string $path, string $local = null ) : string
+	public function readf( string $path, ?string $local = null ) : string
 	{
 		if( $local === null && ( $local = @tempnam( $this->tempdir, 'ai-' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
