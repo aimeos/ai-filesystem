@@ -34,11 +34,14 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 			$config['tempdir'] = sys_get_temp_dir();
 		}
 
+		// @phpstan-ignore argument.type, argument.type
 		if( !is_dir( $config['tempdir'] ) && @mkdir( $config['tempdir'], 0755, true ) === false ) {
+			// @phpstan-ignore argument.type
 			throw new Exception( sprintf( 'Directory "%1$s" could not be created', $config['tempdir'] ) );
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
+		// @phpstan-ignore argument.type
 		$this->tempdir = realpath( str_replace( '/', $ds, rtrim( $config['tempdir'], '/' ) ) ) . $ds;
 		$this->config = $config;
 	}
@@ -245,6 +248,7 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
 		}
 
+		// @phpstan-ignore argument.type
 		if( ( $handle = @fopen( $local, 'w' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
 		}

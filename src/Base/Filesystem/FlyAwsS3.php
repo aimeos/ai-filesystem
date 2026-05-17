@@ -46,6 +46,7 @@ class FlyAwsS3 extends FlyBase implements Iface, DirIface, MetaIface
 			}
 
 			$client = S3Client::factory( $config );
+			// @phpstan-ignore argument.type, argument.type
 			$adapter = new AwsS3V3Adapter( $client, $config['bucket'], $config['prefix'] ?? '' );
 			$this->fs = new Filesystem( $adapter );
 		}

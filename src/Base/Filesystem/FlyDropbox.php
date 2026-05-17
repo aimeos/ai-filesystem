@@ -41,6 +41,7 @@ class FlyDropbox extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'accesstoken' ) );
 			}
 
+			// @phpstan-ignore argument.type
 			$client = new Client( $config['accesstoken'] );
 			$this->fs = new Filesystem( $adapter = new DropboxAdapter( $client ), ['case_sensitive' => false] );
 		}

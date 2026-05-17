@@ -41,6 +41,7 @@ class FlyZip extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'filepath' ) );
 			}
 
+			// @phpstan-ignore argument.type
 			$this->fs = new Filesystem( new ZipArchiveAdapter( new FilesystemZipArchiveProvider( $config['filepath'] ) ) );
 		}
 

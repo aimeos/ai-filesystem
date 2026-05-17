@@ -51,15 +51,25 @@ class FlySftp extends FlyBase implements Iface, DirIface, MetaIface
 			}
 
 			$provider = new SftpConnectionProvider(
+				// @phpstan-ignore argument.type
 				$config['host'],
+				// @phpstan-ignore argument.type
 				$config['username'],
+				// @phpstan-ignore argument.type
 				$config['password'] ?? null,
+				// @phpstan-ignore argument.type
 				$config['privateKey'] ?? null,
+				// @phpstan-ignore argument.type
 				$config['passphrase'] ?? null,
+				// @phpstan-ignore argument.type
 				$config['port'] ?? 22,
+				// @phpstan-ignore argument.type
 				$config['agent'] ?? false,
+				// @phpstan-ignore argument.type
 				$config['timeout'] ?? 10,
+				// @phpstan-ignore argument.type
 				$config['retry'] ?? 4,
+				// @phpstan-ignore argument.type
 				$config['fingerprint'] ?? null
 			);
 
@@ -75,6 +85,7 @@ class FlySftp extends FlyBase implements Iface, DirIface, MetaIface
 			] );
 
 
+			// @phpstan-ignore argument.type
 			$this->fs = new Filesystem( new SftpAdapter( $provider, $config['root'], $converter ) );
 		}
 

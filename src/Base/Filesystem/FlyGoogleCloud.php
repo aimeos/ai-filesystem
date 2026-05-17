@@ -42,7 +42,9 @@ class FlyGoogleCloud extends FlyBase implements Iface, DirIface, MetaIface
 			}
 
 			$client = new StorageClient( $config );
+			// @phpstan-ignore argument.type
 			$bucket = $client->bucket( $config['bucket'] );
+			// @phpstan-ignore argument.type
 			$adapter = new GoogleCloudStorageAdapter( $bucket, $config['prefix'] ?? '' );
 			$this->fs = new Filesystem( $adapter );
 		}

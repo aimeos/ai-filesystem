@@ -40,6 +40,7 @@ class FlyLocal extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'basedir' ) );
 			}
 
+			// @phpstan-ignore argument.type
 			$adapter = new LocalFilesystemAdapter( $config['basedir'] );
 			$this->fs = new Filesystem( $adapter );
 		}
