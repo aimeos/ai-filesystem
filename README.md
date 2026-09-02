@@ -158,6 +158,9 @@ For authentication details, have a look at the [Google Cloud client documentatio
 
 ### Local
 
+The `FlyLocal` adapter is retained as a compatibility name for the built-in
+`Standard` adapter and uses the same filesystem-root containment.
+
 Configuration:
 
 ```
