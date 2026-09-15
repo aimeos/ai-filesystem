@@ -135,7 +135,7 @@ Configuration:
 
 ### Google Cloud
 
-Required adapter:
+Required adapter (PHP 8.0+ only):
 
 ```
 composer req league/flysystem-google-cloud-storage
