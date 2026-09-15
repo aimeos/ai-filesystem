@@ -45,7 +45,7 @@ All file system adapter are configured below the ```resource/fs``` configuration
 
 ### Amazon S3
 
-Required adapter:
+Required adapter (PHP 8.1+ only):
 
 ```
 composer req league/flysystem-aws-s3-v3
