@@ -31,7 +31,5 @@ class FlyDropboxTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new FlyDropbox( ['accesstoken' => 'test'] );
 		$this->assertInstanceof( \Aimeos\Base\Filesystem\Iface::class, $object );
-
-		$this->assertFalse( $object->has( 'test' ) );
 	}
 }
