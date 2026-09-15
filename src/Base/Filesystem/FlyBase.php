@@ -53,11 +53,22 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function isdir( string $path ) : bool
 	{
-		try {
-			return $this->getProvider()->directoryExists( $path );
+		try
+		{
+			$provider = $this->getProvider();
+
+			if( method_exists( $provider, 'directoryExists' ) ) {
+				return $provider->directoryExists( $path );
+			}
+
+			foreach( $provider->listContents( $path ) as $attr ) {
+				return $attr->isDir();
+			}
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
+
+		return false;
 	}
 
 
@@ -188,15 +199,23 @@ abstract class FlyBase implements Iface, DirIface, MetaIface
 	 */
 	public function has( string $path ) : bool
 	{
+		$result = false;
+
 		try
 		{
 			$provider = $this->getProvider();
-			return $provider->fileExists( $path ) || $provider->directoryExists( $path );
+			$result = $provider->fileExists( $path );
+
+			if( !$result && method_exists( $provider, 'directoryExists' ) ) {
+				$result = $provider->directoryExists( $path );
+			}
 		}
 		catch( \Exception $e )
 		{
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
+
+		return $result;
 	}
 
 

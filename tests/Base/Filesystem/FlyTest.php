@@ -53,8 +53,21 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsdir()
 	{
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
-			->with( 'test' )->will( $this->returnValue( true ) );
+		if( method_exists( $this->mock, 'directoryExists' ) )
+		{
+			$this->mock->expects( $this->once() )->method( 'directoryExists' )
+				->with( 'test' )->will( $this->returnValue( true ) );
+		}
+		else
+		{
+			$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
+				->setConstructorArgs( [[new \League\Flysystem\DirectoryAttributes( 'test' )]] )
+				->setMethods( ['filter'] )
+				->getMock();
+
+			$this->mock->expects( $this->once() )->method( 'listContents' )
+				->will( $this->returnValue( $listStub ) );
+		}
 
 		$this->assertTrue( $this->object->isdir( 'test' ) );
 	}
@@ -62,8 +75,21 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsdirFalse()
 	{
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
-			->with( 'test' )->will( $this->returnValue( false ) );
+		if( method_exists( $this->mock, 'directoryExists' ) )
+		{
+			$this->mock->expects( $this->once() )->method( 'directoryExists' )
+				->with( 'test' )->will( $this->returnValue( false ) );
+		}
+		else
+		{
+			$listStub = $this->getMockBuilder( '\\League\\Flysystem\\DirectoryListing' )
+				->setConstructorArgs( [[new \League\Flysystem\FileAttributes( 'test' )]] )
+				->setMethods( ['filter'] )
+				->getMock();
+
+			$this->mock->expects( $this->once() )->method( 'listContents' )
+				->will( $this->returnValue( $listStub ) );
+		}
 
 		$this->assertFalse( $this->object->isdir( 'test' ) );
 	}
@@ -71,7 +97,7 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsdirException()
 	{
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
+		$this->object->expects( $this->any() )->method( 'getProvider' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->expectException( \Aimeos\Base\Filesystem\Exception::class );
@@ -217,8 +243,11 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
 			->will( $this->returnValue( false ) );
 
-		$this->mock->expects( $this->once() )->method( 'directoryExists' )
-			->will( $this->returnValue( false ) );
+		if( method_exists( $this->mock, 'directoryExists' ) )
+		{
+			$this->mock->expects( $this->once() )->method( 'directoryExists' )
+				->will( $this->returnValue( false ) );
+		}
 
 		$result = $this->object->has( 'test' );
 
@@ -228,6 +257,10 @@ class FlyTest extends \PHPUnit\Framework\TestCase
 
 	public function testHasDirectory()
 	{
+		if( !method_exists( $this->mock, 'directoryExists' ) ) {
+			$this->markTestSkipped( 'Requires Flysystem 3.x' );
+		}
+
 		$this->mock->expects( $this->once() )->method( 'fileExists' )
 			->will( $this->returnValue( false ) );
 		$this->mock->expects( $this->once() )->method( 'directoryExists' )
