@@ -11,7 +11,7 @@ class FlySftpTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Install Flysystem first' );
 		}
 
-		if( !class_exists( 'League\Flysystem\PhpseclibV2\SftpAdapter' ) ) {
+		if( !class_exists( 'League\Flysystem\PhpseclibV3\SftpAdapter' ) && !class_exists( 'League\Flysystem\PhpseclibV2\SftpAdapter' ) ) {
 			$this->markTestSkipped( 'Install Flysystem SFTP adapter' );
 		}
 	}
