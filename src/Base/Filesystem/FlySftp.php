@@ -11,8 +11,8 @@
 namespace Aimeos\Base\Filesystem;
 
 use League\Flysystem\Filesystem;
-use League\Flysystem\PhpseclibV2\SftpAdapter;
-use League\Flysystem\PhpseclibV2\SftpConnectionProvider;
+use League\Flysystem\PhpseclibV2;
+use League\Flysystem\PhpseclibV3;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 
 
@@ -50,28 +50,18 @@ class FlySftp extends FlyBase implements Iface, DirIface, MetaIface
 				throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'root' ) );
 			}
 
-			$provider = new SftpConnectionProvider(
-				// @phpstan-ignore argument.type
+			$args = [
 				$config['host'],
-				// @phpstan-ignore argument.type
 				$config['username'],
-				// @phpstan-ignore argument.type
 				$config['password'] ?? null,
-				// @phpstan-ignore argument.type
 				$config['privateKey'] ?? null,
-				// @phpstan-ignore argument.type
 				$config['passphrase'] ?? null,
-				// @phpstan-ignore argument.type
 				$config['port'] ?? 22,
-				// @phpstan-ignore argument.type
 				$config['agent'] ?? false,
-				// @phpstan-ignore argument.type
 				$config['timeout'] ?? 10,
-				// @phpstan-ignore argument.type
 				$config['retry'] ?? 4,
-				// @phpstan-ignore argument.type
 				$config['fingerprint'] ?? null
-			);
+			];
 
 			$converter = PortableVisibilityConverter::fromArray( [
 				'file' => [
@@ -85,8 +75,15 @@ class FlySftp extends FlyBase implements Iface, DirIface, MetaIface
 			] );
 
 
-			// @phpstan-ignore argument.type
-			$this->fs = new Filesystem( new SftpAdapter( $provider, $config['root'], $converter ) );
+			if( class_exists( PhpseclibV3\SftpAdapter::class ) ) {
+				// @phpstan-ignore argument.type
+				$adapter = new PhpseclibV3\SftpAdapter( new PhpseclibV3\SftpConnectionProvider( ...$args ), $config['root'], $converter );
+			} else {
+				// @phpstan-ignore argument.type
+				$adapter = new PhpseclibV2\SftpAdapter( new PhpseclibV2\SftpConnectionProvider( ...$args ), $config['root'], $converter );
+			}
+
+			$this->fs = new Filesystem( $adapter );
 		}
 
 		return $this->fs;
